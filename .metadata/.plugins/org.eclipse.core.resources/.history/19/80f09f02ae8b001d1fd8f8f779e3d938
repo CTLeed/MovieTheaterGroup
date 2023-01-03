@@ -1,0 +1,5 @@
+package com.senftleed.theaterseating.controllers;
+
+public class UserController {
+
+}

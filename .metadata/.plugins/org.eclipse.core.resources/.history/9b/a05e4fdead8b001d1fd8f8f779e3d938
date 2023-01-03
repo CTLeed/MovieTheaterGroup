@@ -1,0 +1,5 @@
+package com.senftleed.theaterseating.services;
+
+public class SeatService {
+
+}
