@@ -1,0 +1,37 @@
+package com.senftleed.theaterseating.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.senftleed.theaterseating.models.Seat;
+import com.senftleed.theaterseating.services.SeatService;
+
+@RestController
+@RequestMapping("/seats")
+public class SeatController {
+
+	@Autowired
+	SeatService seatServ;
+	
+	@PostMapping("/add")
+	public String addSeats(
+			@RequestBody List<Seat> seatNames
+			) {
+//		List<Seat> seats = seatServ.getSelectedSeats(seatNames);
+		System.out.println(seatNames);
+		seatServ.addSeats(seatNames);
+		return "Seats added";
+	}
+	
+	@GetMapping("/getall")
+	public List<Seat> getAllSeats() {
+		return seatServ.getAllSeats();
+	}
+	
+}

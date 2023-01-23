@@ -1,5 +1,0 @@
-package com.senftleed.theaterseating.repositories;
-
-public interface SeatRepository {
-
-}

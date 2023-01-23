@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Seatbooking from "./Seatbooking";
+import Seatbooking1 from './Seatbooking1';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { SeatBooking2 } from './views/SeatBooking2';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Seatbooking />
+    {/* <Seatbooking />
+    <Seatbooking1 /> */}
+    <SeatBooking2 />
   </React.StrictMode>
 );
 
