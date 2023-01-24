@@ -4,6 +4,7 @@ import { Paper } from '@mui/material';
 import { SeatBooking2 } from './views/SeatBooking2';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material';
+import { Checkboxes } from './views/Checkboxes';
 
 const theme = createTheme({
   palette: {

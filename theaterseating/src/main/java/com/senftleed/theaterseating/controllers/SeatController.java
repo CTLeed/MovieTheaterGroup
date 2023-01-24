@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,11 @@ public class SeatController {
 	@GetMapping("/seats")
 	public List<Seat> getAll() {;
 		return seatServ.getAllSeats();
+	}
+	
+	@PostMapping("/seats/update")
+	public String update() {
+		return seatServ.save(Seat updatedSeat);
 	}
 	
 

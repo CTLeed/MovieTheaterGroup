@@ -1,5 +1,5 @@
 import { Button, Container, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material'
-import { useEffect } from 'react';
+import { useEffect, ReactDOM } from 'react';
 import { useState, setState } from 'react'
 import { getSeats, updateSeats } from '../services/seatService';
 import EventSeatIcon from '@mui/icons-material/EventSeat';
@@ -28,28 +28,23 @@ export const SeatBooking2 = (props) => {
             })
     }, [])
 
-    // const handleChange = (e) => {
-    //     setTempSelect(e.target.checked);
-    //     if (tempSelect) {
-    //         setReservedSeats({
-    //             ...reservedSeats,
-    //             [e.target]: e.target.checked
-    //         })
-    //     }
-    // }
+    // With this useState I wan't to collect the checked checkboxes
+    const [checkedCheckboxes, setCheckedCheckboxes] = useState([]);
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     updateSeats(reservedSeats)
-    //         .then((data) => {
-    //             console.log("seat data", data)
-    //             Navigate(`/seats/update/${data.id}`)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error.response?.data?.errors);
-    //             setErrors(error.response?.data?.errors);
-    //         })
-    // }
+    // This is my handler method that gets triggered when a checkbox get's checked/unchecked
+    // ..and toggles the state of the checkbox
+    const handleCheckboxChange = (data) => {
+        const isChecked = checkedCheckboxes.some(checkedCheckbox => checkedCheckbox.value === data.value)
+        if (isChecked) {
+            setCheckedCheckboxes(
+                checkedCheckboxes.filter(
+                    (checkedCheckbox) => checkedCheckbox.value !== data.value
+                )
+            );
+        } else {
+            setCheckedCheckboxes(checkedCheckboxes.concat(data));
+        }
+    };
 
     return (
         <div className="background" >
@@ -91,7 +86,10 @@ export const SeatBooking2 = (props) => {
                                     }
                                     return (
                                         <TableCell key={index1} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} />
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                onChange={() => handleCheckboxChange(seat)} />
                                         </TableCell>
                                     )
                                 })
@@ -284,6 +282,10 @@ export const SeatBooking2 = (props) => {
                     <IconButton size='large' color="secondary">
                         <ConfirmationNumberIcon />
                     </IconButton>
+                    <div>
+                        <h1>State:</h1>
+                        <pre>{JSON.stringify(checkedCheckboxes, null, 2)}</pre>
+                    </div>
                 </Container>
                 {/* </form> */}
             </TableContainer>
