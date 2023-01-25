@@ -10,4 +10,16 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepo;
+	
+//	CREATE
+	
+//	READ ALL
+	
+//	READ ONE
+	
+//	UPDATE
+	
+//	DELETE
+	
+	
 }

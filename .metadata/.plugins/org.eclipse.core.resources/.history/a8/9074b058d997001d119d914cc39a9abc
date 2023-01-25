@@ -1,0 +1,47 @@
+package com.senftleed.theaterseating.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.senftleed.theaterseating.models.Seat;
+import com.senftleed.theaterseating.services.SeatService;
+
+@Controller
+@RestController
+@RequestMapping("/api/v1/")
+public class SeatController {
+
+	@Autowired
+	SeatService seatServ;
+	
+	@GetMapping("/seats/new")
+	public String newSeats(
+			@ModelAttribute("seatObject") Seat newSeat
+			) {
+		return "addSeats.jsp";
+	}
+	
+	@PostMapping("/seats/add")
+	public String addSeat(
+			@ModelAttribute("seatObject") Seat newSeat,
+			BindingResult results
+			) {
+		seatServ.create(newSeat);
+		return "redirect:/seats/new";
+	}
+	
+	
+	@GetMapping("/seats")
+	public List<Seat> getAll() {;
+		return seatServ.getAllSeats();
+	}
+	
+}
