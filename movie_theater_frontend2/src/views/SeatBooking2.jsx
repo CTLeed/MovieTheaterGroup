@@ -12,11 +12,6 @@ import { Navigate } from 'react-router-dom';
 
 export const SeatBooking2 = (props) => {
     const [seats, setSeats] = useState([]);
-    const [reservedSeats, setReservedSeats] = useState([]);
-    const [tempSelect, setTempSelect] = useState(false);
-    const [errors, setErrors] = useState(null);
-
-
 
     useEffect(() => {
         getSeats()
@@ -28,31 +23,31 @@ export const SeatBooking2 = (props) => {
             })
     }, [])
 
-    // With this useState I wan't to collect the checked checkboxes
+    // With this useState I want to collect the checked checkboxes
     const [checkedCheckboxes, setCheckedCheckboxes] = useState([]);
 
-    // This is my handler method that gets triggered when a checkbox get's checked/unchecked
-    // ..and toggles the state of the checkbox
     const handleCheckboxChange = (data) => {
-        const isChecked = checkedCheckboxes.some(checkedCheckbox => checkedCheckbox.value === data.value)
-        if (isChecked) {
-            setCheckedCheckboxes(
-                checkedCheckboxes.filter(
-                    (checkedCheckbox) => checkedCheckbox.value !== data.value
-                )
-            );
-        } else {
-            setCheckedCheckboxes(checkedCheckboxes.concat(data));
+        let newArray = [...checkedCheckboxes, data.id];
+        if (checkedCheckboxes.includes(data.id)) {
+            newArray = newArray.filter(seat => seat !== data.id);
         }
+        setCheckedCheckboxes(
+            [...newArray]
+        );
     };
+
+    const handleSend = (e) => {
+        e.preventDefault();
+        checkedCheckboxes.map((checkbox) => {
+            updateSeats(checkbox)
+        })
+    }
+
 
     return (
         <div className="background" >
             <h2 className='text-center text-white'>Choose Your Seats</h2>
             <TableContainer sx={{ width: '50%', margin: 'auto', backgroundColor: 'transparent', border: 'none' }}>
-                {/* <form onSubmit={(e) => {
-                            handleSubmit(e);
-                        }}> */}
                 <Table sx={{ ['& .${tableRowClasses.root']: { borderBottom: 'none' }, opacity: '100%', border: 'none' }}>
                     <TableHead>
                         <TableRow>
@@ -75,17 +70,41 @@ export const SeatBooking2 = (props) => {
                         <TableRow>
                             <TableCell sx={{ color: 'whitesmoke' }} align='center'>A</TableCell>
                             {
-                                seats.slice(0, 12).map((seat, index1) => {
+                                seats.slice(0, 12).map((seat) => {
                                     const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
+                                    if (is_selected === true) {
                                         return (
-                                            <TableCell key={index1} align='center'>
+                                            <TableCell key={seat.id} align='center'>
                                                 <Checkbox icon={<EventSeatIcon color='error' />} disabled />
                                             </TableCell>
                                         )
                                     }
                                     return (
-                                        <TableCell key={index1} align='center'>
+                                        <TableCell key={seat.id} align='center'>
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                value={seat}
+                                                onChange={() => handleCheckboxChange(seat)} />
+                                        </TableCell>
+                                    )
+                                })
+                            }
+                        </TableRow>
+                        <TableRow>
+                            <TableCell sx={{ color: 'whitesmoke' }} align='center'>B</TableCell>
+                            {
+                                seats.slice(12, 24).map((seat) => {
+                                    const { id, name, is_selected } = seat;
+                                    if (is_selected === true) {
+                                        return (
+                                            <TableCell key={seat.id} align='center'>
+                                                <Checkbox icon={<EventSeatIcon color='error' />} disabled />
+                                            </TableCell>
+                                        )
+                                    }
+                                    return (
+                                        <TableCell key={seat.id} align='center'>
                                             <Checkbox
                                                 icon={<EventSeatOutlined color='secondary' />}
                                                 checkedIcon={<EventSeatIcon color='info' />}
@@ -96,40 +115,23 @@ export const SeatBooking2 = (props) => {
                             }
                         </TableRow>
                         <TableRow>
-                            <TableCell sx={{ color: 'whitesmoke' }} align='center'>B</TableCell>
-                            {
-                                seats.slice(12, 24).map((seat, index2) => {
-                                    const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
-                                        return (
-                                            <TableCell key={index2} align='center'>
-                                                <Checkbox icon={<EventSeatIcon color='error' />} disabled />
-                                            </TableCell>
-                                        )
-                                    }
-                                    return (
-                                        <TableCell key={index2} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} value={is_selected} />
-                                        </TableCell>
-                                    )
-                                })
-                            }
-                        </TableRow>
-                        <TableRow>
                             <TableCell sx={{ color: 'whitesmoke' }} align='center'>C</TableCell>
                             {
-                                seats.slice(24, 36).map((seat, index3) => {
+                                seats.slice(24, 36).map((seat) => {
                                     const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
+                                    if (is_selected === true) {
                                         return (
-                                            <TableCell key={index3} align='center'>
+                                            <TableCell key={seat.id} align='center'>
                                                 <Checkbox icon={<EventSeatIcon color='error' />} disabled />
                                             </TableCell>
                                         )
                                     }
                                     return (
-                                        <TableCell key={index3} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} value={is_selected} />
+                                        <TableCell key={seat.id} align='center'>
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                onChange={() => handleCheckboxChange(seat)} />
                                         </TableCell>
                                     )
                                 })
@@ -138,18 +140,21 @@ export const SeatBooking2 = (props) => {
                         <TableRow>
                             <TableCell sx={{ color: 'whitesmoke' }} align='center'>D</TableCell>
                             {
-                                seats.slice(36, 48).map((seat, index4) => {
+                                seats.slice(36, 48).map((seat) => {
                                     const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
+                                    if (is_selected === true) {
                                         return (
-                                            <TableCell key={index4} align='center'>
+                                            <TableCell key={seat.id} align='center'>
                                                 <Checkbox icon={<EventSeatIcon color='error' />} disabled />
                                             </TableCell>
                                         )
                                     }
                                     return (
-                                        <TableCell key={index4} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} value={is_selected} />
+                                        <TableCell key={seat.id} align='center'>
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                onChange={() => handleCheckboxChange(seat)} />
                                         </TableCell>
                                     )
                                 })
@@ -158,18 +163,21 @@ export const SeatBooking2 = (props) => {
                         <TableRow>
                             <TableCell sx={{ color: 'whitesmoke' }} align='center'>E</TableCell>
                             {
-                                seats.slice(48, 60).map((seat, index5) => {
+                                seats.slice(48, 60).map((seat) => {
                                     const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
+                                    if (is_selected === true) {
                                         return (
-                                            <TableCell key={index5} align='center'>
+                                            <TableCell key={seat.id} align='center'>
                                                 <Checkbox icon={<EventSeatIcon color='error' />} disabled />
                                             </TableCell>
                                         )
                                     }
                                     return (
-                                        <TableCell key={index5} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} value={is_selected} />
+                                        <TableCell key={seat.id} align='center'>
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                onChange={() => handleCheckboxChange(seat)} />
                                         </TableCell>
                                     )
                                 })
@@ -178,18 +186,21 @@ export const SeatBooking2 = (props) => {
                         <TableRow>
                             <TableCell sx={{ color: 'whitesmoke' }} align='center'>F</TableCell>
                             {
-                                seats.slice(60, 72).map((seat, index6) => {
+                                seats.slice(60, 72).map((seat) => {
                                     const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
+                                    if (is_selected === true) {
                                         return (
-                                            <TableCell key={index6} align='center'>
+                                            <TableCell key={seat.id} align='center'>
                                                 <Checkbox icon={<EventSeatIcon color='error' />} disabled />
                                             </TableCell>
                                         )
                                     }
                                     return (
-                                        <TableCell key={index6} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} value={is_selected} />
+                                        <TableCell key={seat.id} align='center'>
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                onChange={() => handleCheckboxChange(seat)} />
                                         </TableCell>
                                     )
                                 })
@@ -198,18 +209,21 @@ export const SeatBooking2 = (props) => {
                         <TableRow>
                             <TableCell sx={{ color: 'whitesmoke' }} align='center'>G</TableCell>
                             {
-                                seats.slice(72, 84).map((seat, index7) => {
+                                seats.slice(72, 84).map((seat) => {
                                     const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
+                                    if (is_selected === true) {
                                         return (
-                                            <TableCell key={index7} align='center'>
+                                            <TableCell key={seat.id} align='center'>
                                                 <Checkbox icon={<EventSeatIcon color='error' />} disabled />
                                             </TableCell>
                                         )
                                     }
                                     return (
-                                        <TableCell key={index7} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} value={is_selected} />
+                                        <TableCell key={seat.id} align='center'>
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                onChange={() => handleCheckboxChange(seat)} />
                                         </TableCell>
                                     )
                                 })
@@ -218,18 +232,21 @@ export const SeatBooking2 = (props) => {
                         <TableRow>
                             <TableCell sx={{ color: 'whitesmoke' }} align='center'>H</TableCell>
                             {
-                                seats.slice(84, 96).map((seat, index8) => {
+                                seats.slice(84, 96).map((seat) => {
                                     const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
+                                    if (is_selected === true) {
                                         return (
-                                            <TableCell key={index8} align='center'>
+                                            <TableCell key={seat.id} align='center'>
                                                 <Checkbox icon={<EventSeatIcon color='error' />} disabled />
                                             </TableCell>
                                         )
                                     }
                                     return (
-                                        <TableCell key={index8} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} value={is_selected} />
+                                        <TableCell key={seat.id} align='center'>
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                onChange={() => handleCheckboxChange(seat)} />
                                         </TableCell>
                                     )
                                 })
@@ -238,18 +255,21 @@ export const SeatBooking2 = (props) => {
                         <TableRow>
                             <TableCell sx={{ color: 'whitesmoke' }} align='center'>I</TableCell>
                             {
-                                seats.slice(96, 108).map((seat, index9) => {
+                                seats.slice(96, 108).map((seat) => {
                                     const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
+                                    if (is_selected === true) {
                                         return (
-                                            <TableCell key={index9} align='center'>
+                                            <TableCell key={seat.id} align='center'>
                                                 <Checkbox icon={<EventSeatIcon color='error' />} disabled />
                                             </TableCell>
                                         )
                                     }
                                     return (
-                                        <TableCell key={index9} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} value={is_selected} />
+                                        <TableCell key={seat.id} align='center'>
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                onChange={() => handleCheckboxChange(seat)} />
                                         </TableCell>
                                     )
                                 })
@@ -258,18 +278,21 @@ export const SeatBooking2 = (props) => {
                         <TableRow>
                             <TableCell sx={{ color: 'whitesmoke' }} align='center'>J</TableCell>
                             {
-                                seats.slice(108, 120).map((seat, index10) => {
+                                seats.slice(108, 120).map((seat) => {
                                     const { id, name, is_selected } = seat;
-                                    if (is_selected == true) {
+                                    if (is_selected === true) {
                                         return (
-                                            <TableCell key={index10} align='center'>
+                                            <TableCell key={seat.id} align='center'>
                                                 <Checkbox icon={<EventSeatIcon color='error' />} disabled />
                                             </TableCell>
                                         )
                                     }
                                     return (
-                                        <TableCell key={index10} align='center'>
-                                            <Checkbox icon={<EventSeatOutlined color='secondary' />} checkedIcon={<EventSeatIcon color='info' />} value={is_selected} />
+                                        <TableCell key={seat.id} align='center'>
+                                            <Checkbox
+                                                icon={<EventSeatOutlined color='secondary' />}
+                                                checkedIcon={<EventSeatIcon color='info' />}
+                                                onChange={() => handleCheckboxChange(seat)} />
                                         </TableCell>
                                     )
                                 })
@@ -287,7 +310,6 @@ export const SeatBooking2 = (props) => {
                         <pre>{JSON.stringify(checkedCheckboxes, null, 2)}</pre>
                     </div>
                 </Container>
-                {/* </form> */}
             </TableContainer>
         </div >
     )
