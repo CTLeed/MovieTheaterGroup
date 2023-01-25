@@ -7,15 +7,8 @@ import { IconButton } from '@mui/material';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import { Checkbox } from '@mui/material';
 import { EventSeatOutlined } from '@mui/icons-material';
-import PurchaseModal from './PurchaseModal';
 import { Navigate } from 'react-router-dom';
 
-export const handleSend = (e) => {
-    e.preventDefault();
-    checkedCheckboxes.map((checkbox) => {
-        updateSeats(checkbox)
-    })
-}
 
 export const SeatBooking2 = (props) => {
     const [seats, setSeats] = useState([]);
@@ -44,7 +37,12 @@ export const SeatBooking2 = (props) => {
     };
 
     // This function should send each seatId in checkedCheckboxes list to database, and refresh page for visual update of purchased seats
-
+    const handleSend = (e) => {
+        e.preventDefault();
+        checkedCheckboxes.map((checkbox) => {
+            updateSeats(checkbox)
+        })
+    }
 
 
     return (
@@ -305,7 +303,7 @@ export const SeatBooking2 = (props) => {
                 </Table>
                 <Container sx={{ backgroundColor: 'transparent', display: 'flex', justifyContent: 'center' }}>
                     <p style={{ color: 'white', fontSize: '12pt', }}>Reserve Seats</p>
-                    <IconButton size='large' color="secondary" onClick={<PurchaseModal />}>
+                    <IconButton size='large' color="secondary">
                         <ConfirmationNumberIcon />
                     </IconButton>
                     {/* <div>
