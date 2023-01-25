@@ -1,4 +1,4 @@
-import { Button, Container, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material'
+import { Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import { useEffect, ReactDOM } from 'react';
 import { useState, setState } from 'react'
 import { getSeats, updateSeats } from '../services/seatService';
@@ -7,8 +7,15 @@ import { IconButton } from '@mui/material';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import { Checkbox } from '@mui/material';
 import { EventSeatOutlined } from '@mui/icons-material';
+import PurchaseModal from './PurchaseModal';
 import { Navigate } from 'react-router-dom';
 
+export const handleSend = (e) => {
+    e.preventDefault();
+    checkedCheckboxes.map((checkbox) => {
+        updateSeats(checkbox)
+    })
+}
 
 export const SeatBooking2 = (props) => {
     const [seats, setSeats] = useState([]);
@@ -36,12 +43,8 @@ export const SeatBooking2 = (props) => {
         );
     };
 
-    const handleSend = (e) => {
-        e.preventDefault();
-        checkedCheckboxes.map((checkbox) => {
-            updateSeats(checkbox)
-        })
-    }
+    // This function should send each seatId in checkedCheckboxes list to database, and refresh page for visual update of purchased seats
+
 
 
     return (
@@ -302,13 +305,13 @@ export const SeatBooking2 = (props) => {
                 </Table>
                 <Container sx={{ backgroundColor: 'transparent', display: 'flex', justifyContent: 'center' }}>
                     <p style={{ color: 'white', fontSize: '12pt', }}>Reserve Seats</p>
-                    <IconButton size='large' color="secondary">
+                    <IconButton size='large' color="secondary" onClick={<PurchaseModal />}>
                         <ConfirmationNumberIcon />
                     </IconButton>
-                    <div>
+                    {/* <div>
                         <h1>State:</h1>
                         <pre>{JSON.stringify(checkedCheckboxes, null, 2)}</pre>
-                    </div>
+                    </div> */}
                 </Container>
             </TableContainer>
         </div >
