@@ -4,10 +4,11 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
-import { IconButton } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Card, IconButton } from '@mui/material';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import { updateSeats } from '../services/seatService';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
     position: 'absolute',
@@ -41,6 +42,7 @@ export default function ReserveModal({ selectedSeats }) {
                 .catch((error) => {
                     console.log(error);
                 });
+            handleClose();
         }, [])
     }
 
@@ -56,13 +58,18 @@ export default function ReserveModal({ selectedSeats }) {
                 onClose={handleClose}
                 closeAfterTransition
                 shouldCloseOnOverlayClick={false}
-                BackdropComponent={Backdrop}
+                Backdrop={Backdrop}
                 BackdropProps={{
                     timeout: 500,
                 }}
             >
                 <Fade in={open}>
                     <Box sx={style}>
+                        <div style={{ display: 'flex', justifyContent: 'end' }}>
+                            <IconButton size='large' color="primary-text" onClick={handleClose}>
+                                <CloseIcon />
+                            </IconButton>
+                        </div>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
                             Reserve selected seats:
                         </Typography>
