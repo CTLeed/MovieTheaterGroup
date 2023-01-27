@@ -55,6 +55,7 @@ export default function ReserveModal({ selectedSeats }) {
                 open={open}
                 onClose={handleClose}
                 closeAfterTransition
+                shouldCloseOnOverlayClick={false}
                 BackdropComponent={Backdrop}
                 BackdropProps={{
                     timeout: 500,
