@@ -1,10 +1,8 @@
 import './App.css';
-import { SeatBooking } from './views/SeatBooking';
 import { Paper } from '@mui/material';
-import { SeatBooking2 } from './views/SeatBooking2';
+import { SeatBooking } from './views/SeatBooking';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material';
-import { Checkboxes } from './views/Checkboxes';
 
 const theme = createTheme({
   palette: {
@@ -39,7 +37,7 @@ function App() {
       <div className="App" style={{ backgroundColor: 'primary' }}>
         <h1 style={{ color: 'red' }}>Avatar</h1>
         <Paper>
-          <SeatBooking2 />
+          <SeatBooking />
         </Paper>
       </div >
     </ThemeProvider>

@@ -10,7 +10,7 @@ export const getSeats = async () => {
 }
 
 export const updateSeats = async (data) => {
-    const res = await http.post(`/seats/update/${data}`)
+    const res = await http.post("/seats/update", data)
     return res.data;
 }
 

@@ -44,7 +44,7 @@ public class SeatService {
 //	}
 	
 //	UPDATE
-	public Seat addSeat(Seat reservedSeat) {
+	public Seat reserveSeat(Seat reservedSeat) {
 		return seatRepo.save(reservedSeat);
 	}
 	
