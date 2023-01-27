@@ -6,6 +6,7 @@ import EventSeatIcon from '@mui/icons-material/EventSeat';
 import { Checkbox } from '@mui/material';
 import { EventSeatOutlined } from '@mui/icons-material';
 import ReserveModal from './ReserveModal';
+import Avatar from '../img/avatar_logo.png';
 
 
 export const SeatBooking = (props) => {
@@ -42,6 +43,7 @@ export const SeatBooking = (props) => {
 
     return (
         <div className="background">
+            <img src={Avatar} width='15%' />
             <h2 className='text-center text-white p-3'> Choose Your Seats</ h2>
             <TableContainer sx={{ width: '50%', margin: 'auto', backgroundColor: 'transparent', border: 'none' }}>
                 <Table sx={{ opacity: '100%', border: 'none' }}>

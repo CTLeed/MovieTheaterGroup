@@ -4,6 +4,7 @@ import { SeatBooking } from './views/SeatBooking';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material';
 
+
 const theme = createTheme({
   palette: {
     type: 'dark',
@@ -34,8 +35,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App" style={{ backgroundColor: 'primary' }}>
-        <h1 style={{ color: 'red' }}>Avatar</h1>
+      <div className="App">
         <Paper>
           <SeatBooking />
         </Paper>
