@@ -4,10 +4,11 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
-import { IconButton } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Card, IconButton } from '@mui/material';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import { updateSeats } from '../services/seatService';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
     position: 'absolute',
@@ -21,13 +22,14 @@ const style = {
     p: 4,
 };
 
+// This functional component will create the modal button which will verify the user's choice, and if they continue, send the reserved seats to the database
+// Will eventually route to billing (likely using Stripe API)
 export default function ReserveModal({ selectedSeats }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     // This function should send each seatId in checkedCheckboxes list to database, and refresh page for visual update of purchased seats
-
     const handleSend = (e) => {
         const checkedCheckboxes = selectedSeats
         console.log(selectedSeats)
@@ -41,6 +43,7 @@ export default function ReserveModal({ selectedSeats }) {
                 .catch((error) => {
                     console.log(error);
                 });
+            handleClose();
         }, [])
     }
 
@@ -55,13 +58,19 @@ export default function ReserveModal({ selectedSeats }) {
                 open={open}
                 onClose={handleClose}
                 closeAfterTransition
-                BackdropComponent={Backdrop}
+                shouldCloseOnOverlayClick={false}
+                Backdrop={Backdrop}
                 BackdropProps={{
                     timeout: 500,
                 }}
             >
                 <Fade in={open}>
                     <Box sx={style}>
+                        <div style={{ display: 'flex', justifyContent: 'end' }}>
+                            <IconButton size='large' color="primary-text" onClick={handleClose}>
+                                <CloseIcon />
+                            </IconButton>
+                        </div>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
                             Reserve selected seats:
                         </Typography>
