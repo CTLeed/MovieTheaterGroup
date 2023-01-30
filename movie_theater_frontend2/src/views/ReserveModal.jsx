@@ -22,13 +22,14 @@ const style = {
     p: 4,
 };
 
+// This functional component will create the modal button which will verify the user's choice, and if they continue, send the reserved seats to the database
+// Will eventually route to billing (likely using Stripe API)
 export default function ReserveModal({ selectedSeats }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     // This function should send each seatId in checkedCheckboxes list to database, and refresh page for visual update of purchased seats
-
     const handleSend = (e) => {
         const checkedCheckboxes = selectedSeats
         console.log(selectedSeats)

@@ -30,13 +30,6 @@ public class SeatController {
 		return seatServ.getAllSeats();
 	}
 	
-//	@PostMapping("/seats/update/{id}")
-//	public String update(
-//			@PathVariable("id") Long seatId
-//			) {	
-//		seatServ.reserveSeat(seatId);
-//		return "Seat updated";
-//	}
 	
     @PostMapping("/seats/update")
     public List<Seat> updateGroup(@RequestBody Seat seat) {

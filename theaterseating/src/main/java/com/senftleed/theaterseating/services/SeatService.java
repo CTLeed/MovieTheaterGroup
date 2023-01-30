@@ -1,7 +1,6 @@
 package com.senftleed.theaterseating.services;
 
 import java.util.List;
-import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,9 +38,6 @@ public class SeatService {
 		return seatRepo.findById(id).orElse(null);
 	}
 	
-//	public List<Seat> getSelectedSeats(List<String> selectedSeats) {
-//		return seatRepo.findSelectedSeats(selectedSeats);
-//	}
 	
 //	UPDATE
 	public Seat reserveSeat(Seat reservedSeat) {
