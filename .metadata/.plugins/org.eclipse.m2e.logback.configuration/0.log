@@ -1638,3 +1638,11 @@
 2023-01-29 22:32:28,327 [Worker-23: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2023-01-29 22:32:28,327 [Worker-23: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2023-01-29 22:32:28,327 [Worker-23: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\12065\OneDrive\Desktop\react_java_project\theaterseating\src\test\resources
+2023-02-03 22:53:54,208 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2023-02-04 01:33:40,041 [Worker-21: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-02-04 01:33:40,042 [Worker-21: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-02-04 01:33:40,045 [Worker-21: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-02-04 01:33:40,053 [Worker-21: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2023-02-04 01:33:40,056 [Worker-21: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-02-04 01:33:40,056 [Worker-21: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-02-04 01:33:40,056 [Worker-21: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\12065\OneDrive\Desktop\react_java_project\theaterseating\src\test\resources
