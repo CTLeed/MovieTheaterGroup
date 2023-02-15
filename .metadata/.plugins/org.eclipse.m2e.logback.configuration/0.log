@@ -1724,3 +1724,11 @@
 2023-02-10 00:38:28,158 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2023-02-10 00:38:28,158 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2023-02-10 00:38:28,158 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\12065\OneDrive\Desktop\react_java_project\theaterseating\src\test\resources
+2023-02-14 23:11:24,430 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2023-02-14 23:11:42,715 [Worker-1: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-02-14 23:11:42,716 [Worker-1: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-02-14 23:11:42,718 [Worker-1: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-02-14 23:11:42,725 [Worker-1: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2023-02-14 23:11:42,728 [Worker-1: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-02-14 23:11:42,728 [Worker-1: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-02-14 23:11:42,728 [Worker-1: Launching theaterseating - TheaterseatingApplication] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\12065\OneDrive\Desktop\react_java_project\theaterseating\src\test\resources

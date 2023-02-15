@@ -10,10 +10,11 @@ import Select from '@mui/material/Select';
 import { Button } from '@mui/material';
 
 export const MovieSelect = () => {
-    const [movie, setMovie] = useState({})
-    const [movies, setMovies] = useState([])
-    const [apiMovie, setApiMovie] = useState({});
-    const [apiMovieList, setAPIMovieList] = useState([])
+    const [movie, setMovie] = useState({});
+    const [movies, setMovies] = useState([]);
+    const [avatar, setAvatar] = useState({});
+    const [darkKnight, setDarkKnight] = useState({});
+    const [matrix, setMatrix] = useState({});
 
     useEffect(() => {
         getMovies()
@@ -29,24 +30,54 @@ export const MovieSelect = () => {
 
     }
 
-    const handleChange = (e) => {
-        setApiMovie(e.target.value);
-        let title = apiMovie.name.replace(" ", "+");
-        getMovieByTitle(title)
+    useEffect(() => {
+        getMovieByTitle("avatar")
             .then((data) => {
-                setMovie(data);
+                setAvatar(data.Poster);
             }).catch((error) => {
                 console.log(error);
-            })
+            });
+        getMovieByTitle("the+dark+knight")
+            .then((data) => {
+                setDarkKnight(data.Poster);
+            }).catch((error) => {
+                console.log(error);
+            });
+        getMovieByTitle("the+matrix")
+            .then((data) => {
+                setMatrix(data.Poster);
+                console.log(matrix);
+            }).catch((error) => {
+                console.log(error);
+            });
+    }, [])
+
+
+    const handleChange = (e) => {
+        setMovie(e.target.value);
     };
+
+    const MoviePoster = () => {
+        if (movie.name == "The Matrix") {
+            return (
+                <img src={matrix} height="100%" />
+            )
+        } if (movie.name == "The Dark Knight") {
+            return (
+                <img src={darkKnight} height="100%" />
+            )
+        } if (movie.name == "Avatar") {
+            return <img src={avatar} height="100%" />
+        }
+    }
 
     return (
         <ThemeProvider theme={theme}>
             <div className="background">
-                <Container>
+                <Container sx={{ alignItems: 'center' }} >
                     <Grid container spacing={2}>
                         <Grid item xs={6} sx={{ marginTop: '20px' }}>
-                            <img src={movie.Poster} height="100%" />
+                            <MoviePoster />
                         </Grid>
                         <Grid item xs={6} alignItems='center'>
                             <Box sx={{ width: '50%', paddingTop: '20px' }}>
@@ -75,8 +106,6 @@ export const MovieSelect = () => {
                         </Grid>
                     </Grid>
                 </Container>
-                {/* <h1 style={{ color: 'black' }}>{apiMovie.Title}</h1>
-                <img src={apiMovie.Poster} /> */}
             </div>
         </ThemeProvider >
     )
