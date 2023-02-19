@@ -49,3 +49,7 @@ img {
 .MenuItem.Mui-selected {
   color: black;
 }
+
+p {
+  color: rgba(255, 255, 255, 1);
+}

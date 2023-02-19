@@ -21,16 +21,24 @@ public class Movie {
 	private String name;
 	
 	@DateTimeFormat(pattern="hh:mm:ss")
-	private Date time;
+	private Date timeOne;
+	
+	@DateTimeFormat(pattern="hh:mm:ss")
+	private Date timeTwo;
+	
+	@DateTimeFormat(pattern="hh:mm:ss")
+	private Date timeThree;
 
 	public Movie() {
 		super();
 	}
 
-	public Movie(String name, Date time) {
+	public Movie(String name, Date timeOne, Date timeTwo, Date timeThree) {
 		super();
 		this.name = name;
-		this.time = time;
+		this.timeOne = timeOne;
+		this.timeTwo = timeTwo;
+		this.timeThree = timeThree;
 	}
 
 	public Long getId() {
@@ -49,13 +57,31 @@ public class Movie {
 		this.name = name;
 	}
 
-	public Date getTime() {
-		return time;
+	public Date getTimeOne() {
+		return timeOne;
 	}
 
-	public void setTime(Date time) {
-		this.time = time;
+	public void setTimeOne(Date timeOne) {
+		this.timeOne = timeOne;
 	}
+
+	public Date getTimeTwo() {
+		return timeTwo;
+	}
+
+	public void setTimeTwo(Date timeTwo) {
+		this.timeTwo = timeTwo;
+	}
+
+	public Date getTimeThree() {
+		return timeThree;
+	}
+
+	public void setTimeThree(Date timeThree) {
+		this.timeThree = timeThree;
+	}
+
+	
 
 
 	
